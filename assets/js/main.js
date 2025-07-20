@@ -80,18 +80,15 @@
  window.addEventListener('load', animateOnScroll);
  
  // Form submission
- document.getElementById('contactForm').addEventListener('submit', (e) => {
-     e.preventDefault();
-     
-     // Here you would typically send the form data to a server
-     // For demo purposes, we'll just show an alert
-     alert('Obrigado pela sua mensagem! Em breve entraremos em contato.');
-     
-     // Reset the form
-     e.target.reset();
- });
-
-// HEADER SCROLL SHADOW
+ const contactForm = document.getElementById('contactForm');
+ if (contactForm) {
+     contactForm.addEventListener('submit', (e) => {
+         // Não previne o envio, deixa o Formspree funcionar
+         // Pode exibir um loading ou feedback se quiser
+     });
+ }
+ 
+ // HEADER SCROLL SHADOW
 const header = document.getElementById('mainHeader');
 window.addEventListener('scroll', () => {
     if(window.scrollY > 10) {

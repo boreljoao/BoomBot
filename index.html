@@ -55,7 +55,7 @@
                 <span class="close-line"></span>
             </button>
             <a href="/index.html">Início</a>
-            <a href="#services">Serviços</a>
+            <a href="#services ">Serviços</a>
             <a href="#about">Sobre</a>
             <a href="#contact">Contato</a>
         </nav>
@@ -160,7 +160,7 @@
                     </div>
                     <div class="info-text">
                         <h3>Email</h3>
-                        <p>contato@boombot.digital</p>
+                        <a href="mailto:contato@boombot.digital" style="text-decoration: none; color: #F4F4F4;">boombotinc@gmail.com</a>
                     </div>
                 </div>
                 
@@ -170,31 +170,31 @@
                     </div>
                     <div class="info-text">
                         <h3>Telefone</h3>
-                        <p>+55 (11) 91234-5678</p>
+                        <a style="text-decoration: none; color: #F4F4F4;;" href="tel:+5521972868504">+55 21 97286-8504</a>
                     </div>
                 </div>
             </div>
             
             <div class="contact-form">
-                <form id="contactForm">
+                <form id="contactForm" method="POST" action="https://formspree.io/f/mwpqvrqd">
                     <div class="form-group">
                         <label for="name">Seu Nome</label>
-                        <input type="text" id="name" class="form-control" required>
+                        <input type="text" id="name" name="name" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="email">Seu Email</label>
-                        <input type="email" id="email" class="form-control" required>
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="subject">Assunto</label>
-                        <input type="text" id="subject" class="form-control" required>
+                        <input type="text" id="subject" name="subject" class="form-control" required>
                     </div>
                     
                     <div class="form-group">
                         <label for="message">Sua Mensagem</label>
-                        <textarea id="message" class="form-control" required></textarea>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
                     </div>
                     
                     <button type="submit" class="submit-btn">Enviar Mensagem</button>
@@ -211,16 +211,16 @@
             <!-- From Uiverse.io by dovatgabriel --> 
 <div class="card">
     <span>Social</span>
-    <a class="social-linke" href="#">
+    <a class="social-linke email-gmail" href="mailto:contato@boombot.digital">
         <i class="fas fa-envelope"></i>
     </a>
-    <a class="social-linke" href="#">
+    <a class="social-linke" href="https://wa.me/5521972868504" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
-    <a class="social-linke" href="#">
+    <a class="social-linke" href="https://www.instagram.com/boombot.tech/" target="_blank">
         <i class="fab fa-instagram"></i>
     </a>
-    <a class="social-linke" href="#">
+    <a class="social-linke" href="https://www.google.com/maps/search/?api=1&query=123+Rua+Digital,+Cidade+Tech" target="_blank">
         <i class="fas fa-map-marker-alt"></i>
     </a>
   </div>
@@ -276,6 +276,21 @@ particlesJS("particles-js", {
 });
 
 
+</script>
+<script>
+// Email inteligente: Gmail no desktop, mailto no mobile
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function handleEmailClick(e) {
+    if (!isMobile()) {
+        e.preventDefault();
+        window.open('https://mail.google.com/mail/?view=cm&fs=1&to=boombotinc@gmail.com&su=Assunto&body=Mensagem', '_blank');
+    }
+}
+document.querySelectorAll('a[href^="mailto:contato@boombot.digital"], a[href^="mailto:boombotinc@gmail.com"], a.email-gmail').forEach(function(link) {
+    link.addEventListener('click', handleEmailClick);
+});
 </script>
 </body>
 </html>
