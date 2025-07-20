@@ -805,7 +805,9 @@ textarea.form-control {
     .hero-content, .about-content, .contact-info {
         text-align: center;
     }
-    
+    .scroll-down{
+        display: none;
+    }
     .hero-image {
         max-width: 400px;
         margin-top: 3rem;
