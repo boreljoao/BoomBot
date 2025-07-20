@@ -12,7 +12,9 @@
     box-sizing: border-box;
     font-family: "Inter", sans-serif;
 }
-
+html{
+    overflow-y: hidden;
+}
 body{
     color: var(--light-gray);
     overflow-x: hidden;
