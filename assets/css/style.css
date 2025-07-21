@@ -1258,7 +1258,10 @@ textarea.form-control {
     display: grid;
     gap: 1.5rem;
 }
-
+#hamburgerBtn:focus {
+    outline: none;
+    box-shadow: none;
+}
 .form-control {
     width: 100%;
     padding: 1rem;
