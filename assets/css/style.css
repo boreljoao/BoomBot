@@ -289,7 +289,7 @@ body{
 }
 
 .hero p {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     margin-bottom: 2rem;
     color: rgba(244, 244, 244, 0.8);
     line-height: 1.6;
@@ -422,7 +422,7 @@ body{
 /* Services Section */
 .services {
     min-height: 100vh;
-    padding: 8rem 10%;
+    padding: 8rem 10% 2rem 10%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -484,6 +484,7 @@ body{
     backdrop-filter: blur(10px);
     opacity: 1;
     transform: none;
+    box-shadow: 0 2px 10px rgba(139, 0, 255, 0.08);
 }
 
 .service-card.visible {
@@ -507,8 +508,9 @@ body{
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(139, 0, 255, 0.1);
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 18px 40px rgba(139, 0, 255, 0.18), 0 2px 10px rgba(139, 0, 255, 0.08);
+    z-index: 2;
 }
 
 .service-card:hover::before {
@@ -530,6 +532,7 @@ body{
 .service-card p {
     color: rgba(244, 244, 244, 0.7);
     line-height: 1.6;
+    font-size: 1.1rem;
 }
 
 .service-card::after {
@@ -673,7 +676,7 @@ body{
 }
 
 .about p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 1.5rem;
     color: rgba(244, 244, 244, 0.8);
     line-height: 1.6;
@@ -732,7 +735,7 @@ body{
     display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
-    background-color: #1E1E1E;
+    background-color: #1e1e1e79;
     border-radius: 15px;
     padding: 0.5rem;
 }
@@ -762,10 +765,9 @@ body{
 
 .contact-form {
     flex: 1;
-    background-color: rgba(30, 30, 30, 0.7);
+    background-color: #1e1e1eb9;
     border-radius: 15px;
     padding: 2rem;
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(168, 85, 247, 0.1);
     opacity: 0;
     transform: translateY(50px);
@@ -906,6 +908,12 @@ textarea.form-control {
 }
 
 /* Responsive */
+@media (max-width: 1367px) {
+    .about-image dotlottie-wc {
+        width: 450px !important;
+        height: 450px !important;
+    }
+}
 @media (max-width: 1200px) {
     .hero h1 {
         font-size: 3rem;
@@ -914,6 +922,13 @@ textarea.form-control {
     .about-container, .contact-container {
         gap: 3rem;
     }
+    .about-image dotlottie-wc {
+        width: 370px !important;
+        height: 370px !important;
+    }
+    .about-content p{
+        font-size: 1rem;
+    }
 }
 
 @media (max-width: 992px) {
@@ -921,8 +936,12 @@ textarea.form-control {
         flex-direction: column;
         
     }
+    .character-image{
+        display: none;
+    }
     .hero{
         margin-top: 130px;
+        height: auto;
     }
     .hero-content, .about-content, .contact-info {
         text-align: center;
@@ -955,6 +974,7 @@ textarea.form-control {
     }
     .about{
         padding-top: 50px;
+        padding-bottom: 5rem;
     }
     #about{
         scroll-margin-top: 40px;
@@ -970,6 +990,10 @@ textarea.form-control {
     }
     #testimonials{
         scroll-margin-top: 60px;
+    }
+    .about-image dotlottie-wc {
+        width: 400px !important;
+        height: 400px !important;
     }
 }
 
