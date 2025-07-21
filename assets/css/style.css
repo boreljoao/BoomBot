@@ -1107,8 +1107,10 @@ textarea.form-control {
     color: var(--light-gray);
 }
 .close-btn {
+    z-index: 99;
     position: absolute;
-    top: 2.2rem;
+    background-color: red;
+    top: 1.2rem;
     right: 2.2rem;
     width: 38px;
     height: 38px;

@@ -85,21 +85,53 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // --- MENU MOBILE ---
+    // --- MENU MOBILE (REFEITO) ---
     const hamburgerBtn = document.getElementById('hamburgerBtn');
     const navMobile = document.getElementById('navMobile');
     const closeMenuBtn = document.getElementById('closeMenuBtn');
+    const body = document.body;
+
+    function openMenu() {
+        navMobile.classList.add('open');
+        hamburgerBtn.classList.add('active');
+        body.style.overflow = 'hidden'; // Impede scroll do fundo
+        closeMenuBtn.focus();
+    }
+    function closeMenu() {
+        navMobile.classList.remove('open');
+        hamburgerBtn.classList.remove('active');
+        body.style.overflow = '';
+        hamburgerBtn.focus();
+    }
     if (hamburgerBtn && navMobile && closeMenuBtn) {
-        const closeMenu = () => {
-            navMobile.classList.remove('open');
-            hamburgerBtn.classList.remove('active');
-        };
-        hamburgerBtn.addEventListener('click', () => {
-            navMobile.classList.add('open');
-            hamburgerBtn.classList.add('active');
+        hamburgerBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (navMobile.classList.contains('open')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
-        closeMenuBtn.addEventListener('click', closeMenu);
-        document.querySelectorAll('.nav-mobile a').forEach(link => link.addEventListener('click', closeMenu));
+        closeMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeMenu();
+        });
+        // Fecha ao clicar em qualquer link do menu mobile
+        navMobile.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+        // Fecha ao clicar fora do menu
+        document.addEventListener('click', function(e) {
+            if (navMobile.classList.contains('open') && !navMobile.contains(e.target) && e.target !== hamburgerBtn) {
+                closeMenu();
+            }
+        });
+        // Fecha ao pressionar ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && navMobile.classList.contains('open')) {
+                closeMenu();
+            }
+        });
     }
 
     // --- CONTADOR DE ESTATÍSTICAS ---
@@ -179,5 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         easing: 'ease-in-out',
         origin: 'bottom',
     });
+
+    
 });
 
