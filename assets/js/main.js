@@ -1,3 +1,4 @@
+
  // Custom cursor effect
  const cursor = document.getElementById('cursor');
  if (cursor) {
@@ -140,3 +141,58 @@ if (particlesContainer) {
         particlesContainer.appendChild(particle);
     }
 }
+
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+function handleEmailClick(e) {
+    if (!isMobile()) {
+        e.preventDefault();
+        window.open('https://mail.google.com/mail/?view=cm&fs=1&to=boombotinc@gmail.com&su=Assunto&body=Mensagem', '_blank');
+    }
+}
+document.querySelectorAll('a[href^="mailto:contato@boombot.digital"], a[href^="mailto:boombotinc@gmail.com"], a.email-gmail').forEach(function(link) {
+    link.addEventListener('click', handleEmailClick);
+});
+window.addEventListener('load', function() {
+    const loader = document.getElementById('loader');
+    if(loader) {
+        loader.classList.add('loader-hide');
+        setTimeout(() => loader.style.display = 'none', 600);
+    }
+});
+
+
+  particlesJS("particles-js", {
+    particles: {
+      number: { value: 60 },
+      size: { value: 1 },
+      color: { value: "#A855F7" },
+      move: { enable: true, speed: 1 },
+      line_linked: {
+        enable: true,
+        distance: 150,
+        color: "#A855F7",
+        opacity: 0.4,
+        width: 1
+      }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "repulse" // ou grab, bubble
+        },
+        onclick: {
+          enable: true,
+          mode: "push"
+        }
+      },
+      modes: {
+        repulse: { distance: 100 },
+        push: { particles_nb: 4 }
+      }
+    },
+    retina_detect: true
+  });

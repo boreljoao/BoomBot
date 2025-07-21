@@ -737,6 +737,7 @@ textarea.form-control {
     padding: 3rem 10%;
     background-color: var(--black);
     text-align: center;
+    position: relative;
     border-top: 1px solid rgba(168, 85, 247, 0.1);
 }
 
@@ -1134,7 +1135,22 @@ textarea.form-control {
     background-color: rgba(249, 244, 255, 0.774);
     animation: bounce_613 0.5s linear;
   }
-  
+  /* ===== FORMULÁRIO DE CONTATO ===== */
+.contact-form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.form-control {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(244, 244, 244, 0.1);
+    border: 1px solid rgba(244, 244, 244, 0.1);
+    border-radius: 0.5rem;
+    color: var(--light-gray);
+    transition: var(--transition);
+}
+
   @keyframes bounce_613 {
     40% {
       transform: scale(1.4);
