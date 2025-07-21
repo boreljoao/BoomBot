@@ -155,7 +155,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: rgba(255,255,255,0.02);
+    background: rgba(255, 255, 255, 0.096);
     padding: 1.5rem 2rem;
     border-radius: 12px;
     border: 1px solid rgba(168, 85, 247, 0.2);
@@ -430,14 +430,14 @@ body{
 
 .section-title {
     text-align: center;
-    margin-bottom: 5rem;
+    margin: 0 auto 5rem auto;
     font-size: 2.5rem;
     color: var(--light-gray);
     position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
+    display: block;
+    width: fit-content;
 }
+
 
 .section-title::after {
     content: '';
@@ -701,6 +701,7 @@ body{
     opacity: 0;
     transform: translateY(50px);
     z-index: 1;
+   
 }
 
 .contact-info.visible {
@@ -731,12 +732,15 @@ body{
     display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
+    background-color: #1E1E1E;
+    border-radius: 15px;
+    padding: 0.5rem;
 }
 
 .info-icon {
     width: 50px;
     height: 50px;
-    background-color: rgba(168, 85, 247, 0.1);
+    background-color: #a855f71a;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -959,6 +963,12 @@ textarea.form-control {
         padding-top: 40px;
     }
     #contact{
+        scroll-margin-top: 60px;
+    }
+    .testimonials{
+        padding-top: 30px;
+    }
+    #testimonials{
         scroll-margin-top: 60px;
     }
 }
