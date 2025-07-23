@@ -995,6 +995,10 @@ textarea.form-control {
         width: 400px !important;
         height: 400px !important;
     }
+    .info-item{
+        text-align: left;
+        
+    }
 }
 
 @media (max-width: 768px) {
@@ -1375,6 +1379,19 @@ textarea.form-control {
   #particles-js canvas {
     pointer-events: auto; /* Apenas o canvas responde ao mouse */
   }
+  
+
+@media (max-width: 600px) {
+    .contact-info .info-item {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .contact-info .info-icon {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+}
   
 
   
