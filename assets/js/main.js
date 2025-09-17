@@ -215,3 +215,62 @@ document.addEventListener('DOMContentLoaded', function() {
     
 });
 
+// service-pages.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Animação de revelação para elementos das páginas de serviço
+    const sr = ScrollReveal({
+      origin: 'bottom',
+      distance: '50px',
+      duration: 800,
+      reset: false,
+      easing: 'cubic-bezier(0.5, 0, 0, 1)'
+    });
+    
+    // Animações específicas para páginas de serviço
+    sr.reveal('.service-hero-content', { delay: 200 });
+    sr.reveal('.service-hero-image', { delay: 300, origin: 'right' });
+    sr.reveal('.about-card', { interval: 100, delay: 400 });
+    sr.reveal('.feature-item', { interval: 100, delay: 400 });
+    sr.reveal('.process-step', { interval: 100, delay: 400 });
+    sr.reveal('.service-feature', { interval: 100, delay: 400 });
+    sr.reveal('.pricing-card', { interval: 100, delay: 400 });
+    
+    // Contador para estatísticas (se aplicável)
+    const stats = document.querySelectorAll('.stat-number');
+    if (stats.length > 0) {
+      const statObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const stat = entry.target;
+            const target = +stat.getAttribute('data-target');
+            const increment = target / 100;
+            let current = 0;
+            
+            const updateStat = () => {
+              if (current < target) {
+                current += increment;
+                stat.textContent = Math.ceil(current);
+                setTimeout(updateStat, 20);
+              } else {
+                stat.textContent = target;
+              }
+            };
+            
+            updateStat();
+            statObserver.unobserve(stat);
+          }
+        });
+      }, { threshold: 0.5 });
+      
+      stats.forEach(stat => statObserver.observe(stat));
+    }
+    
+    // FAQ interactivity
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      question.addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+  });
