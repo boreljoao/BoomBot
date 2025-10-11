@@ -212,6 +212,57 @@ document.addEventListener('DOMContentLoaded', function() {
         origin: 'bottom',
     });
 
+    // --- TOUCH FRIENDLY: Tap-to-toggle nos service cards ---
+    const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches || 'ontouchstart' in window;
+    const serviceCards = Array.from(document.querySelectorAll('.service-card'));
+    if (serviceCards.length && isTouch) {
+        function deactivateAll() {
+            serviceCards.forEach(card => {
+                card.classList.remove('active');
+                card.setAttribute('aria-expanded', 'false');
+            });
+        }
+        serviceCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                // Evita que cliques internos fechem imediatamente
+                e.stopPropagation();
+                const willActivate = !card.classList.contains('active');
+                deactivateAll();
+                if (willActivate) {
+                    card.classList.add('active');
+                    card.setAttribute('aria-expanded', 'true');
+                }
+            });
+            card.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    card.click();
+                }
+            });
+        });
+        document.addEventListener('click', () => deactivateAll());
+    }
+
+    // --- ABOUT VISUAL tilt/parallax (desktop only) ---
+    const aboutVisual = document.querySelector('.about-visual');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (aboutVisual && !isTouch && !reduceMotion) {
+        const strength = 10; // deg
+        function resetTilt(){
+            aboutVisual.style.transform = 'rotateX(0deg) rotateY(0deg)';
+        }
+        aboutVisual.addEventListener('mousemove', (e) => {
+            const rect = aboutVisual.getBoundingClientRect();
+            const x = (e.clientX - rect.left) / rect.width;   // 0..1
+            const y = (e.clientY - rect.top) / rect.height;  // 0..1
+            const rotY = (x - 0.5) * strength;  // left/right
+            const rotX = -(y - 0.5) * strength; // up/down
+            aboutVisual.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+        });
+        aboutVisual.addEventListener('mouseleave', resetTilt);
+        resetTilt();
+    }
+
     
 });
 
