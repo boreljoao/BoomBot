@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.addEventListener('mousemove', (e) => {
             cursor.style.left = `${e.clientX}px`;
             cursor.style.top = `${e.clientY}px`;
-            const target = e.target.closest('a, button, .service-card, .social-linke, .form-control');
+            const target = e.target.closest('a, button, .service-card, .social-linke, .form-control, .contact-input, .contact-textarea');
             if (target) {
                 cursor.style.transform = 'translate(-50%, -50%) scale(2)';
                 cursor.style.backgroundColor = 'rgba(168, 85, 247, 0.3)';
@@ -25,25 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => loader.style.display = 'none', 600);
     }
     
-    // --- PARTICLES.JS ---
-    particlesJS("particles-js", {
-        particles: {
-            number: { value: 80, density: { enable: true, value_area: 800 } },
-            color: { value: "#A855F7" },
-            shape: { type: "circle" },
-            opacity: { value: 0.5, random: true },
-            size: { value: 2, random: true },
-            line_linked: { enable: true, distance: 150, color: "#A855F7", opacity: 0.4, width: 1 },
-            move: { enable: true, speed: 1, direction: "none", random: false, straight: false, out_mode: "out", bounce: false }
-        },
-        interactivity: {
-            detect_on: "canvas",
-            events: { onhover: { enable: true, mode: "repulse" }, onclick: { enable: true, mode: "push" }, resize: true },
-            modes: { repulse: { distance: 100, duration: 0.4 }, push: { particles_nb: 4 } }
-        },
-        retina_detect: true
-    });
-
+    
     // --- SCROLLREVEAL ---
     const sr = ScrollReveal({
         origin: 'bottom',
@@ -60,21 +42,27 @@ document.addEventListener('DOMContentLoaded', function() {
     sr.reveal('.hero-image', { delay: 500, origin: 'right' });
     sr.reveal('.scroll-down', { delay: 800 });
     
+    sr.reveal('.services', { delay: 140, distance: '55px' });
+    sr.reveal('.services .section-led', { delay: 180, distance: '45px' });
     sr.reveal('.services .section-title', { delay: 200 });
-    sr.reveal('.service-card', { interval: 100, delay: 300 });
+    sr.reveal('.service-card', { interval: 140, delay: 260 });
 
     // Correção: Agora vai animar, pois o CSS foi corrigido
-    sr.reveal('.about-image', { delay: 200, origin: 'left' });
-    sr.reveal('.about-content', { delay: 300 });
+    sr.reveal('.about', { delay: 150, distance: '55px' });
+    sr.reveal('.about-image', { delay: 220, origin: 'left' });
+    sr.reveal('.about-content', { delay: 320 });
 
     // ✅ NOVO: Animação para a seção de depoimentos e estatísticas
-    sr.reveal('.testimonials .section-title2', { delay: 200 });
-    sr.reveal('.testimonial-slider', { delay: 300 });
-    sr.reveal('.stats div', { interval: 100, delay: 400 });
+    sr.reveal('.testimonials', { delay: 170, distance: '55px' });
+    sr.reveal('.testimonials-head', { delay: 230 });
+    sr.reveal('.testimonial-card', { delay: 320, interval: 140 });
+    
 
-    // Correção: Agora vai animar, pois o CSS foi corrigido
-    sr.reveal('.contact-info', { delay: 200 });
-    sr.reveal('.contact-form', { delay: 300, origin: 'right' });
+    // Contato com iluminação mágica
+    sr.reveal('.contact', { delay: 170, distance: '55px' });
+    sr.reveal('.contact-head', { delay: 220, origin: 'top' });
+    sr.reveal('.contact-card', { delay: 300, origin: 'bottom' });
+    sr.reveal('.contact-meta-item', { delay: 360, interval: 80, origin: 'bottom' });
 
 
     // --- HEADER COM SOMBRA ---
@@ -90,6 +78,49 @@ document.addEventListener('DOMContentLoaded', function() {
     const navMobile = document.getElementById('navMobile');
     const closeMenuBtn = document.getElementById('closeMenuBtn');
     const body = document.body;
+
+    // --- TRANSIÇÃO DE TEMAS POR SEÇÃO ---
+    const themeSections = document.querySelectorAll('[data-theme]');
+    const removeThemeClasses = () => {
+        Array.from(body.classList)
+            .filter(cls => cls.startsWith('theme-'))
+            .forEach(cls => body.classList.remove(cls));
+    };
+    const applyTheme = (themeName) => {
+        if (!themeName) return;
+        const targetClass = `theme-${themeName}`;
+        if (body.classList.contains(targetClass)) return;
+        removeThemeClasses();
+        body.classList.add(targetClass);
+    };
+    if (themeSections.length) {
+        const isSmallViewport = window.matchMedia('(max-width: 768px)').matches;
+        const themeObserver = new IntersectionObserver((entries) => {
+            const visibleEntry = entries
+                .filter(entry => entry.isIntersecting)
+                .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+            if (visibleEntry) {
+                applyTheme(visibleEntry.target.dataset.theme);
+            }
+        }, { threshold: isSmallViewport ? 0.3 : 0.45 });
+
+        themeSections.forEach(section => themeObserver.observe(section));
+
+        const ensureInitialTheme = () => {
+            const midpoint = window.innerHeight / 2;
+            const current = Array.from(themeSections).find(section => {
+                const rect = section.getBoundingClientRect();
+                return rect.top <= midpoint && rect.bottom >= midpoint;
+            }) || themeSections[0];
+            if (current) {
+                applyTheme(current.dataset.theme);
+            }
+        };
+
+        window.addEventListener('load', ensureInitialTheme);
+        window.addEventListener('resize', ensureInitialTheme);
+        ensureInitialTheme();
+    }
 
     function openMenu() {
         navMobile.classList.add('open');
@@ -212,6 +243,163 @@ document.addEventListener('DOMContentLoaded', function() {
         origin: 'bottom',
     });
 
+    // --- TESTIMONIAL AUDIO PLAYERS ---
+    const testimonialPlayers = document.querySelectorAll('.testimonial-audio');
+    let activeAudioState = null;
+
+    const waveformHeights = [60, 80, 40, 90, 70, 50, 85, 45, 75, 55, 95, 65, 50, 80, 60, 70, 85, 55, 75, 65];
+
+    const formatAudioTime = (seconds) => {
+        if (!Number.isFinite(seconds)) return '0:00';
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60).toString().padStart(2, '0');
+        return `${minutes}:${secs}`;
+    };
+
+    const updateWaveBars = (state, percentage) => {
+        if (!state.waveBars.length) return;
+        const activeCount = Math.round((percentage / 100) * state.waveBars.length);
+        state.waveBars.forEach((bar, index) => {
+            bar.classList.toggle('is-active', index < activeCount);
+        });
+    };
+
+    const pauseState = (state, reset = false) => {
+        if (!state) return;
+        state.audio.pause();
+        if (reset) {
+            state.audio.currentTime = 0;
+            state.slider.value = 0;
+            updateWaveBars(state, 0);
+        } else if (Number.isFinite(state.audio.duration) && state.audio.duration > 0) {
+            const percentage = (state.audio.currentTime / state.audio.duration) * 100;
+            state.slider.value = percentage;
+            updateWaveBars(state, percentage);
+        }
+        state.wrapper.classList.remove('is-playing');
+        state.control.setAttribute('aria-label', state.playLabel);
+        if (Number.isFinite(state.audio.duration) && state.audio.duration > 0) {
+            state.time.textContent = `${formatAudioTime(state.audio.duration - state.audio.currentTime)}`;
+        } else {
+            state.time.textContent = '0:00';
+        }
+        if (activeAudioState === state) {
+            activeAudioState = null;
+        }
+    };
+
+    testimonialPlayers.forEach((wrapper) => {
+        const control = wrapper.querySelector('.audio-button');
+        const slider = wrapper.querySelector('.audio-progress');
+        const time = wrapper.querySelector('.audio-time');
+        const wave = wrapper.querySelector('.audio-waveform');
+        const audioEl = wrapper.querySelector('.audio-element');
+        const src = wrapper.dataset.audio || (audioEl ? audioEl.getAttribute('src') : '');
+        const audio = audioEl || new Audio(src);
+
+        if (!src || !control || !slider || !time) return;
+        if (!audioEl) {
+            audio.preload = 'metadata';
+            wrapper.appendChild(audio);
+        } else {
+            audio.preload = 'metadata';
+        }
+
+        if (audio.src !== src) {
+            audio.src = src;
+        }
+
+        if (wave && wave.children.length === 0) {
+            const bars = Number(wave.dataset.bars) || waveformHeights.length;
+            for (let i = 0; i < bars; i += 1) {
+                const span = document.createElement('span');
+                const height = waveformHeights[i % waveformHeights.length];
+                span.style.height = `${height}%`;
+                wave.appendChild(span);
+            }
+        }
+
+        const state = {
+            wrapper,
+            control,
+            slider,
+            time,
+            audio,
+            waveBars: wave ? Array.from(wave.children) : [],
+            playLabel: control.getAttribute('aria-label') || 'Reproduzir depoimento',
+            pauseLabel: 'Pausar depoimento',
+        };
+
+        slider.value = 0;
+        slider.disabled = true;
+        time.textContent = '0:00';
+        updateWaveBars(state, 0);
+
+        audio.addEventListener('loadedmetadata', () => {
+            slider.disabled = false;
+            time.textContent = `${formatAudioTime(audio.duration)}`;
+        });
+
+        audio.addEventListener('timeupdate', () => {
+            if (!Number.isFinite(audio.duration) || audio.duration === 0) return;
+            const percentage = (audio.currentTime / audio.duration) * 100;
+            if (!slider.matches(':active')) {
+                slider.value = percentage;
+            }
+            time.textContent = `${formatAudioTime(audio.duration - audio.currentTime)}`;
+            updateWaveBars(state, percentage);
+        });
+
+        audio.addEventListener('play', () => {
+            wrapper.classList.add('is-playing');
+            control.setAttribute('aria-label', state.pauseLabel);
+        });
+
+        audio.addEventListener('pause', () => {
+            if (audio.ended) return;
+            wrapper.classList.remove('is-playing');
+            control.setAttribute('aria-label', state.playLabel);
+        });
+
+        audio.addEventListener('ended', () => {
+            pauseState(state, true);
+        });
+
+        control.addEventListener('click', () => {
+            if (audio.paused) {
+                if (activeAudioState && activeAudioState !== state) {
+                    pauseState(activeAudioState, false);
+                }
+                audio.play().then(() => {
+                    activeAudioState = state;
+                }).catch(() => {});
+            } else {
+                pauseState(state, false);
+            }
+        });
+
+        slider.addEventListener('input', () => {
+            if (!Number.isFinite(audio.duration) || audio.duration === 0) return;
+            const percentage = Number(slider.value);
+            audio.currentTime = (percentage / 100) * audio.duration;
+            updateWaveBars(state, percentage);
+            time.textContent = `${formatAudioTime(audio.duration - audio.currentTime)}`;
+        });
+
+        if (wave) {
+            wave.addEventListener('click', (event) => {
+                if (!Number.isFinite(audio.duration) || audio.duration === 0) return;
+                const rect = wave.getBoundingClientRect();
+                const percentage = ((event.clientX - rect.left) / rect.width) * 100;
+                const clamped = Math.min(Math.max(percentage, 0), 100);
+                slider.value = clamped;
+                audio.currentTime = (clamped / 100) * audio.duration;
+                updateWaveBars(state, clamped);
+                time.textContent = `${formatAudioTime(audio.duration - audio.currentTime)}`;
+            });
+        }
+    });
+
     // --- TOUCH FRIENDLY: Tap-to-toggle nos service cards ---
     const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches || 'ontouchstart' in window;
     const serviceCards = Array.from(document.querySelectorAll('.service-card'));
@@ -325,3 +513,4 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   });
+

@@ -31,8 +31,12 @@
         <meta name="twitter:site" content="@BoomBot_tech">
     
         <!-- Favicon Moderno (SVG + PNG Fallback) -->
-        <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
         <link rel="icon" href="/assets/favicon/favicon.svg" type="image/svg+xml">
+        <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon/favicon-48x48.png">
+        <link rel="icon" type="image/png" sizes="96x96" href="/assets/favicon/favicon-96x96.png">
+        <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon/web-app-manifest-192x192.png">
+        <link rel="icon" href="/assets/favicon/favicon.ico" sizes="any">
         <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
         <link rel="manifest" href="/assets/favicon/site.webmanifest">
     
@@ -95,7 +99,8 @@
   ]
 }</script>
     </head>
-<body>
+<body class="theme-hero">
+    <div class="bg-stage" aria-hidden="true"></div>
     <div id="loader" class="loader">
         <picture>
             <source srcset="/assets/images/raw.avif" type="image/avif">
@@ -150,31 +155,24 @@
     </header>
     
     <!-- Hero Section -->
-    <section class="hero" id="hero">
+    <section class="hero" id="hero" data-theme="hero">
+        <div class="hero-arc" aria-hidden="true"></div>
         <div class="hero-container">
             <div class="hero-content">
-                <h1>Gestão Inteligente para Crescer no Digital</h1>
+                <h1>Transforme seu negócio com gestão digital inteligente.</h1>
                 <p>Estar no digital não é mais uma opção — é essencial. A BoomBot cria soluções inteligentes sob medida para conectar sua marca ao que realmente importa: resultados.</p>
-                <a href="https://wa.me/5521972868504?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20os%20serviços%20da%20BoomBot" class="cta-button">Falar com especialista agora</a>
+                <a href="https://wa.me/5521972868504?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20da%20BoomBot" class="cta-button"><span>Falar com especialista</span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
             </div>
             
-            <div class="hero-image">
-                <!-- Your character image will go here -->
-                <picture>
-                    <source srcset="/assets/images/raw.avif" type="image/avif">
-                    <img src="/assets/images/raw.webp" alt="Digital management illustration" class="character-image">
-                </picture>
-                
-            </div>
+            
         </div>
-        
         <div class="scroll-down" id="scrollDown">Desça para ver mais</div>
+        
     </section>
     
     <!-- Services Section -->
-    <section class="services" id="services">
+    <section class="services" id="services" data-theme="services">
         <h2 class="section-title">Nossos Serviços <i class="fas fa-cog"></i></h2>
-        
         <div class="services-grid">
             <div class="service-card" role="button" tabindex="0" aria-expanded="false" aria-label="Mais detalhes do serviço Desenvolvimento Web">
                 <div class="service-icon">
@@ -239,12 +237,11 @@
     </section>
     
     <!-- About Section -->
-    <section class="about" id="about">
+    <section class="about" id="about" data-theme="about">
         <h2 class="section-title about-section-title">Sobre a BoomBot <i class="fas fa-bolt spin-icon"></i></h2>
         <div class="about-container">
             <div class="about-content about-modern">
-                <span class="about-eyebrow">Sobre a BoomBot</span>
-                <h2>Construímos experiências que performam</h2>
+                <h3>Construímos experiências que performam</h3>
                 <p class="about-lead">Juntamos desenvolvimento web, automação com IA e marketing de performance para acelerar o crescimento do seu negócio — com design, velocidade e foco em resultado.</p>
 
                 <div class="about-badges">
@@ -290,117 +287,126 @@
             
         </div>
     </section>
-    <section class="testimonials" id="testimonials">
-        <h2 class="section-title2">O que dizem sobre nós</h2>
-        <div class="testimonial-slider">
-          <blockquote>“Site impecável! Muito atencioso, todas as demandas solicitadas foram atendidas e solucionadas com excelência.”<span>— Daniel, Pro code</span></blockquote>
-          <!--<blockquote>“Site moderno, rápido e suporte excelente.”<span>— , Oficina ProCar</span></blockquote> -->
+    <section class="testimonials" id="testimonials" data-theme="testimonials">
+        <div class="testimonials-shell">
+            <div class="testimonials-head">
+                <span class="testimonials-chip">Resultados reais</span>
+                <h2>O que dizem sobre nós</h2>
+                <p>Projetos lançados com a BoomBot destacam velocidade, design refinado e suporte contínuo orientado a resultados.</p>
+            </div>
+            <div class="section-led" data-led>
+                <span class="section-led__bar"></span>
+            </div>
+            <div class="testimonials-grid">
+                <article class="testimonial-card">
+                    <p class="testimonial-quote">Site impecável! Muito atencioso, todas as demandas solicitadas foram atendidas e solucionadas com excelência.</p>
+                    <div class="testimonial-author">
+                        <span class="author-name">Daniel</span>
+                        <span class="author-role">Founder · Pro Code</span>
+                    </div>
+                </article>
+                <article class="testimonial-card">
+                    <p class="testimonial-quote">Todos os meus clientes elogiam o site: rápido, clean e com a nossa cara. O time da BoomBot entrega e acompanha.</p>
+                    <div class="clean-audio-player">
+                        <audio class="audio-element" src="assets/audio/caiowave.mp3"></audio>
+                        <button class="clean-play-button" type="button" aria-label="Reproduzir depoimento de Caio">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <div class="clean-progress-container">
+                            <div class="clean-progress-bar">
+                                <div class="clean-progress-fill"></div>
+                            </div>
+                            <span class="clean-time-display">0:00</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-author">
+                        <span class="author-name">Caio</span>
+                        <span class="author-role">Head de Operações · Wavecom</span>
+                    </div>
+                </article>
+            </div>
         </div>
-        <!--<div class="stats">
-            <div><span class="count" data-target="999">0</span><p>Projetos Entregues</p></div>
-            <div><span class="count" data-target="999">0</span><p>Clientes Satisfeitos</p></div>
-        </div> -->
-        <div class="testimonial-slider">
-            <blockquote>“Todos meus clientes estão satisfeitos com o meu site e estão falando que esta muito clean e moderno. ”<span>— Caio, Wavecom </span></blockquote>
-            <!--<blockquote>“Site moderno, rápido e suporte excelente.”<span>— , Oficina ProCar</span></blockquote> -->
-          </div>
       </section>
     <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="contact-container">
-            <div class="contact-info">
-                <h2>Fale Conosco</h2>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="info-text">
-                        <h3>Localização</h3>
-                        <p>Nuvem</p>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="info-text">
-                        <h3>Email</h3>
-                        <a href="mailto:contato@boombot.digital" style="text-decoration: none; color: #F4F4F4;">contato@boombot.digital</a>
-                    </div>
-                </div>
-                
-                <div class="info-item">
-                    <div class="info-icon">
-                        <i class="fas fa-phone-alt"></i>
-                    </div>
-                    <div class="info-text">
-                        <h3>Telefone</h3>
-                        <a style="text-decoration: none; color: #F4F4F4;;" href="tel:+5521972868504">+55 21 97286-8504</a>
-                    </div>
-                </div>
+    <section class="contact" id="contact" data-theme="contact">
+        <div class="contact-shell">
+            <div class="contact-head">
+                <span class="contact-chip">Precisa de ajuda?</span>
+                <h2>Fale com a BoomBot</h2>
+                <p>Construa automações, sites e campanhas com uma equipe que respira IA e performance.</p>
             </div>
-            
-            <div class="contact-form">
-                <form id="contactForm" method="POST" action="https://formspree.io/f/mwpqvrqd">
-                    <div class="form-group">
-                        <label for="name">Seu Nome</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
+            <div class="contact-card">
+                <form id="contactForm" class="contact-form" method="POST" action="https://formspree.io/f/mwpqvrqd">
+                    <div class="contact-row">
+                        <div class="contact-field">
+                            <label for="name">Seu nome</label>
+                            <input type="text" id="name" name="name" class="contact-input" required>
+                        </div>
+                        <div class="contact-field">
+                            <label for="email">Seu email</label>
+                            <input type="email" id="email" name="email" class="contact-input" required>
+                        </div>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Seu Email</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    
-                    <div class="form-group">
+                    <div class="contact-field">
                         <label for="subject">Assunto</label>
-                        <input type="text" id="subject" name="subject" class="form-control" required>
+                        <input type="text" id="subject" name="subject" class="contact-input" required>
                     </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Sua Mensagem</label>
-                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    <div class="contact-field">
+                        <label for="message">Sua mensagem</label>
+                        <textarea id="message" name="message" class="contact-textarea" required></textarea>
                     </div>
-                    
-                    <button type="submit" class="submit-btn">Enviar Mensagem</button>
+                    <button type="submit" class="contact-submit">
+                        Enviar mensagem
+                        <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </button>
                 </form>
+                <div class="contact-meta">
+                    <a class="contact-meta-item" href="mailto:contato@boombot.digital">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        contato@boombot.digital
+                    </a>
+                    <a class="contact-meta-item" href="https://wa.me/5521972868504" target="_blank" rel="noopener">
+                        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                        +55 21 97286-8504
+                    </a>
+                    
+                </div>
             </div>
         </div>
     </section>
     
     <!-- Footer -->
     <footer class="footer">
-        <a href="index.html" class="footer-logo">BoomBot<span>.</span></a>
-        
-        <div class="social-links">
-            <!-- From Uiverse.io by dovatgabriel --> 
-<div class="card">
-    <span>Social</span>
-    <a class="social-linke email-gmail" href="mailto:contato@boombot.digital">
-        <i class="fas fa-envelope"></i>
-    </a>
-    <a class="social-linke" href="https://wa.me/5521972868504" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-    <a class="social-linke" href="https://www.instagram.com/boombot.tech/" target="_blank">
-        <i class="fab fa-instagram"></i>
-    </a>
-    <a class="social-linke" href="https://www.google.com/maps/search/?api=1&query=123+Rua+Digital,+Cidade+Tech" target="_blank">
-        <i class="fas fa-map-marker-alt"></i>
-    </a>
-</div>
+        <div class="footer-inner">
+            <a href="index.html" class="footer-logo">BoomBot<span>.</span></a>
+            <div class="footer-divider" aria-hidden="true"></div>
+            <nav class="footer-links" aria-label="P&aacute;ginas principais">
+                <a href="gestao-digital-marica.html">Gest&#227;o Digital em Maric&#225;</a>
+                <a href="site-em-marica.html">Sites em Maric&#225;</a>
+                <a href="desenvolvimento-de-sites.html">Desenvolvimento de Sites</a>
+                <a href="boombot.html">Sobre a BoomBot</a>
+            </nav>
+            <div class="footer-social" aria-label="Redes sociais">
+                <a class="footer-social-link email" href="mailto:contato@boombot.digital" aria-label="Enviar e-mail para a BoomBot">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                </a>
+                <a class="footer-social-link whatsapp" href="https://wa.me/5521972868504" target="_blank" rel="noopener" aria-label="Falar com a BoomBot no WhatsApp">
+                    <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                </a>
+                <a class="footer-social-link instagram" href="https://www.instagram.com/boombot.tech/" target="_blank" rel="noopener" aria-label="Visitar o Instagram da BoomBot">
+                    <i class="fab fa-instagram" aria-hidden="true"></i>
+                </a>
+                <a class="footer-social-link map" href="https://www.google.com/maps/search/?api=1&query=123+Rua+Digital,+Cidade+Tech" target="_blank" rel="noopener" aria-label="Abrir o endere&ccedil;o da BoomBot no Google Maps">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                </a>
+            </div>
+            <div class="footer-meta">
+                <span><i class="fas fa-phone" aria-hidden="true"></i>+55 21 97286-8504</span>
+                <span><i class="fas fa-envelope" aria-hidden="true"></i>contato@boombot.digital</span>
+            </div>
+            <p class="copyright">&copy; 2025 BoomBot Digital. Todos os direitos reservados.</p>
+            
         </div>
-        <!--
-        <div class="footer-links" style="margin:1rem 0 2rem; display:flex; flex-wrap:wrap; gap:1rem; justify-content:center;">
-            <a href="/gestao-digital-marica.html" style="color:#A855F7; text-decoration:none;">Gestão Digital em Maricá</a>
-            <a href="/site-em-marica.html" style="color:#A855F7; text-decoration:none;">Sites em Maricá</a>
-            <a href="/desenvolvimento-de-sites.html" style="color:#A855F7; text-decoration:none;">Desenvolvimento de Sites</a>
-            <a href="/boombot.html" style="color:#A855F7; text-decoration:none;">Sobre a BoomBot</a>
-        </div> -->
-
-        <p class="copyright">© 2025 BoomBot Digital. Todos os direitos reservados.</p>
     </footer>
     <script
   src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.6.2/dist/dotlottie-wc.js"
@@ -417,6 +423,111 @@
         <div class="nav-dot" data-target="contact" data-section="Contato"></div>
       </div>
 <script>
+(function () {
+  const body = document.body;
+  const themeSections = document.querySelectorAll('[data-theme]');
+  const themeClasses = ['theme-hero', 'theme-services', 'theme-about', 'theme-testimonials', 'theme-contact'];
+
+  const applyTheme = (name) => {
+    themeClasses.forEach((cls) => body.classList.remove(cls));
+    body.classList.add(`theme-${name}`);
+  };
+
+  if ('IntersectionObserver' in window) {
+    const themeObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          applyTheme(entry.target.dataset.theme);
+        }
+      });
+    }, { threshold: 0.6, rootMargin: '-35% 0px -35% 0px' });
+
+    themeSections.forEach((section) => themeObserver.observe(section));
+  } else if (themeSections.length) {
+    applyTheme(themeSections[0].dataset.theme || 'hero');
+  }
+
+  const leds = document.querySelectorAll('[data-led]');
+  const activateLed = (el) => el.classList.add('is-active');
+
+  if (leds.length) {
+    if ('IntersectionObserver' in window) {
+      const ledObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            activateLed(entry.target);
+            ledObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+
+      leds.forEach((led) => ledObserver.observe(led));
+    } else {
+      leds.forEach(activateLed);
+    }
+  }
+})();
 </script>
+<script>
+    // JavaScript para o player de áudio limpo
+    document.addEventListener('DOMContentLoaded', function() {
+      const playButton = document.querySelector('.clean-play-button');
+      const audioElement = document.querySelector('.audio-element');
+      const progressFill = document.querySelector('.clean-progress-fill');
+      const timeDisplay = document.querySelector('.clean-time-display');
+      
+      if (playButton && audioElement) {
+        playButton.addEventListener('click', function() {
+          const icon = this.querySelector('i');
+          const player = document.querySelector('.clean-audio-player');
+          
+          if (audioElement.paused) {
+            audioElement.play();
+            icon.className = 'fas fa-pause';
+            player.classList.add('playing');
+          } else {
+            audioElement.pause();
+            icon.className = 'fas fa-play';
+            player.classList.remove('playing');
+          }
+        });
+        
+        // Atualizar progresso
+        audioElement.addEventListener('timeupdate', function() {
+          const progress = (audioElement.currentTime / audioElement.duration) * 100;
+          progressFill.style.width = progress + '%';
+          
+          // Atualizar tempo
+          const minutes = Math.floor(audioElement.currentTime / 60);
+          const seconds = Math.floor(audioElement.currentTime % 60);
+          timeDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+        });
+        
+        // Clique na barra de progresso para pular
+        const progressBar = document.querySelector('.clean-progress-bar');
+        if (progressBar) {
+          progressBar.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const width = rect.width;
+            const percentage = clickX / width;
+            audioElement.currentTime = percentage * audioElement.duration;
+          });
+        }
+        
+        // Reset quando terminar
+        audioElement.addEventListener('ended', function() {
+          const icon = playButton.querySelector('i');
+          const player = document.querySelector('.clean-audio-player');
+          icon.className = 'fas fa-play';
+          player.classList.remove('playing');
+          progressFill.style.width = '0%';
+          timeDisplay.textContent = '0:00';
+        });
+      }
+    });
+  </script>
+<script src="https://unpkg.com/@studio-freight/lenis/bundled/lenis.min.js"></script>
 </body>
 </html>
+
